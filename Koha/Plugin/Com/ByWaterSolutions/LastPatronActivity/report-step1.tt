@@ -1,0 +1,89 @@
+[% INCLUDE 'doc-head-open.inc' %]
+ <title>Koha: Patron Last Activity Plugin: Report: Patron List</title>
+ <script type="text/javascript" src="[% PLUGIN_PATH %]/datepicker/js/datepicker.js"></script>
+ <link href="[% PLUGIN_PATH %]/datepicker/css/datepicker.css" rel="stylesheet" type="text/css" />
+[% INCLUDE 'doc-head-close.inc' %]
+[% INCLUDE 'calendar.inc' %]
+</head>
+<body>
+[% INCLUDE 'header.inc' %]
+[% INCLUDE 'cat-search.inc' %]
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; <a href="/cgi-bin/koha/plugins/plugins-home.pl">Plugins</a> &rsaquo; Patron Last Activity &rsaquo; Report &rsaquo; Paramters</div>
+
+<div id="doc3">
+    <h3>Patron Last Activity</h3>
+
+    <!-- Notice our form here has no 'action', this is good, it means that our forms will always get passed back to 'plugins/run.pl'. You could hard code it instead if you prefer -->
+    <form method="get">
+        <input type="hidden" name="class" value="[% CLASS %]"/>
+        <input type="hidden" name="method" value="[% METHOD %]"/>
+
+        <fieldset class="rows">
+            <legend>Limit patrons</legend>
+
+            <ol>
+                <li>
+                    <label for="branch">Select Library:</label>
+                    <select name="branch">
+                        <option value="">All libraries</option>
+                        [% FOREACH branch IN branches_loop %]
+                            <option value="[% branch.value %]" [% IF branch.selected %]selected="selected"[% END %] >
+                                [% branch.branchname %]
+                            </option>
+                        [% END %]
+                    </select>
+                </li>
+
+                <li>
+                    <label for="categorycode">Select Patron Category:</label>
+                    <select name="categorycode">
+                        <option value="">Any</option>
+                        [% FOREACH category IN categories_loop %]
+                            <option value="[% category.categorycode %]">[% category.description %]</option>
+                        [% END %]
+                    </select>
+                </li>
+            </ol>
+        </fieldset>
+
+        <fieldset class="rows">
+            <legend>Registration date range</legend>
+
+            <ol>
+
+                <li>
+                    <label>From:</label>
+                    <input type="text" size="10" id="from" name="from" value="" class="datepickerfrom">
+                </li>
+
+                <li>
+                    <label>To:</label>
+                    <input size="10" id="to" name="to" type="text" value="" class="datepickerto">
+                </li>
+            </ol>
+        </fieldset>
+
+        <fieldset class="rows">
+            <legend>Output</legend>
+
+            <ol>
+
+                <li>
+                    <label for="output">Output Data to:</label>
+                    <select name="output">
+                        <option value="screen">Screen</option>
+                        <option value="csv">CSV File</option>
+                    </select>
+                </li>
+
+            </ol>
+        </fieldset>
+
+        <fieldset class="action">
+            <input class="btn" type="submit" />
+        </fieldset>
+
+    </form>
+
+[% INCLUDE 'intranet-bottom.inc' %]
