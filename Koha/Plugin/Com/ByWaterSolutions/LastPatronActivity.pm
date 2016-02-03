@@ -123,7 +123,6 @@ sub report_step2 {
     );
 
     my $query = "SELECT datetime FROM statistics WHERE borrowernumber = ? ORDER BY datetime DESC LIMIT 1";
-    my $dbh   = C4::Context->dbh;
 
     map { ( $_->{last_activity} ) = $dbh->selectrow_array( $query, undef, $_->{borrowernumber} ) } @borrowers;
 
