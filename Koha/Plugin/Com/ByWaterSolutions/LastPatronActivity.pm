@@ -8,7 +8,6 @@ use base qw(Koha::Plugins::Base);
 
 ## We will also need to include any Koha libraries we want to access
 use C4::Context;
-use C4::Branch;
 use C4::Members;
 use C4::Auth;
 use Koha::DateUtils;
@@ -85,8 +84,7 @@ sub report_step1 {
     my $template = $self->get_template( { file => 'report-step1.tt' } );
 
     $template->param(
-        branches_loop   => GetBranchesLoop(),
-        categories_loop => GetBorrowercategoryList(),
+        current_branch   => C4::Context->userenv->{branch},
     );
 
     print $cgi->header();

@@ -1,3 +1,5 @@
+[% USE Branches %]
+[% USE Categories %]
 [% INCLUDE 'doc-head-open.inc' %]
  <title>Koha: Patron Last Activity Plugin: Report: Patron List</title>
  <script type="text/javascript" src="[% PLUGIN_PATH %]/datepicker/js/datepicker.js"></script>
@@ -27,19 +29,16 @@
                     <label for="branch">Select Library:</label>
                     <select name="branch">
                         <option value="">All libraries</option>
-                        [% FOREACH branch IN branches_loop %]
-                            <option value="[% branch.value %]" [% IF branch.selected %]selected="selected"[% END %] >
-                                [% branch.branchname %]
-                            </option>
-                        [% END %]
+                        [% PROCESS options_for_libraries libraries => Branches.all( current_branch  ) %]
                     </select>
                 </li>
 
                 <li>
+                    [% SET categories = Categories.all() %]
                     <label for="categorycode">Select Patron Category:</label>
                     <select name="categorycode">
                         <option value="">Any</option>
-                        [% FOREACH category IN categories_loop %]
+                        [% FOREACH category IN categories %]
                             <option value="[% category.categorycode %]">[% category.description %]</option>
                         [% END %]
                     </select>
