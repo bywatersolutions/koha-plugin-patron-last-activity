@@ -1,7 +1,7 @@
 {
   "name": "koha-plugin-patron-last-activity",
-  "version": "1.0.6",
-  "previous_version": "1.0.5",
+  "version": "1.0.7",
+  "previous_version": "1.0.6",
   "description": "Koha Patron Last Activity Plugin",
   "devDependencies": {
     "gulp": "^3.9.1",
