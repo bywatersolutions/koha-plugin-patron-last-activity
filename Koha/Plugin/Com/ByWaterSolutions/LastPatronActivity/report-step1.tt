@@ -29,7 +29,7 @@
                     <label for="branch">Select Library:</label>
                     <select name="branch">
                         <option value="">All libraries</option>
-                        [% PROCESS options_for_libraries libraries => Branches.all( current_branch  ) %]
+                        [% PROCESS options_for_libraries libraries => Branches.all( selected => current_branch  ) %]
                     </select>
                 </li>
 

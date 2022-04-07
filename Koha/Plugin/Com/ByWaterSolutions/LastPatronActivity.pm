@@ -110,7 +110,7 @@ sub report_step2 {
     $params->{dateenrolled} = { '>=' => $from, '<=' => $to };
 
     my $schema = Koha::Database->new()->schema();
-    $schema->storage->debug(1);
+    #$schema->storage->debug(1);
 
     my @borrowers = $schema->resultset('Borrower')->search(
         $params,
@@ -135,10 +135,11 @@ sub report_step2 {
 
         my $template = $self->get_template( { file => $filename } );
 
+        my $library = Koha::Libraries->find($branch);
         $template->param(
-            date_ran     => C4::Dates->new()->output(),
+            date_ran     => output_pref(dt_from_string),
             results_loop => \@borrowers,
-            branch       => GetBranchName($branch),
+            branch       => $library->branchname
             category     => $category,
         );
 
