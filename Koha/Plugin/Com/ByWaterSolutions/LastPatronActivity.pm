@@ -10,7 +10,7 @@ use base qw(Koha::Plugins::Base);
 use C4::Context;
 use C4::Members;
 use C4::Auth;
-use Koha::DateUtils;
+use Koha::DateUtils qw( output_pref dt_from_string );
 use Koha::Database;
 
 use Text::CSV::Slurp;
