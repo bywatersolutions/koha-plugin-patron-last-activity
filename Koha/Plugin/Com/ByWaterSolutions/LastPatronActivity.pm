@@ -139,7 +139,7 @@ sub report_step2 {
         $template->param(
             date_ran     => output_pref(dt_from_string),
             results_loop => \@borrowers,
-            branch       => $library->branchname
+            branch       => $library->branchname,
             category     => $category,
         );
 
